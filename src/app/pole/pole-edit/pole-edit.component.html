@@ -1,0 +1,155 @@
+<section *ngIf="!loading; else isLoading">
+  <article fxLayout="column" class="mt-5 mb-5">
+    <span class="fs-2 fw-bold">
+      {{ locale.title.pole }} {{ form.value.name }}
+    </span>
+    <span style="color: #777">
+      {{ locale.title.poleDetail }}
+      {{ form.value.name }}#{{ form.value.id }}
+    </span>
+  </article>
+
+  <article>
+    <span class="small form-title">
+      {{ locale.title.addressDetail }}
+    </span>
+
+    <form [formGroup]="form" class="row mt-3">
+      <mat-form-field class="col-lg-2" appearance="outline">
+        <mat-label>{{ locale["label"].zip }}</mat-label>
+        <input
+          formControlName="cep"
+          matInput
+          placeholder="00000-000"
+          mask="00000-000"
+        />
+      </mat-form-field>
+
+      <mat-form-field
+        formGroupName="address"
+        class="col-lg-4"
+        appearance="outline"
+      >
+        <mat-label>
+          {{
+            loadingAddress ? locale["label"].loading : locale["label"].street
+          }}
+        </mat-label>
+        <input formControlName="street" matInput />
+      </mat-form-field>
+
+      <mat-form-field
+        formGroupName="address"
+        class="col-lg-2"
+        appearance="outline"
+      >
+        <mat-label>
+          {{
+            loadingAddress ? locale.label.loading : locale.label.neighborhood
+          }}
+        </mat-label>
+        <input formControlName="neighborhood" matInput />
+      </mat-form-field>
+
+      <mat-form-field
+        formGroupName="address"
+        class="col-lg-2"
+        appearance="outline"
+      >
+        <mat-label>
+          {{ loadingAddress ? locale.label.loading : locale.label.state }}
+        </mat-label>
+        <input formControlName="state" matInput />
+      </mat-form-field>
+
+      <mat-form-field
+        formGroupName="address"
+        class="col-lg-2"
+        appearance="outline"
+      >
+        <mat-label>
+          {{ loadingAddress ? locale.label.loading : locale.label.city }}
+        </mat-label>
+        <input formControlName="city" matInput />
+      </mat-form-field>
+    </form>
+  </article>
+
+  <article>
+    <span class="small form-title">
+      {{ locale.title.companyDetails }}
+    </span>
+
+    <form [formGroup]="form" class="row mt-3">
+      <mat-form-field class="col-lg-2" appearance="outline">
+        <mat-label>
+          {{ locale.label.name }}
+        </mat-label>
+        <input formControlName="name" matInput />
+      </mat-form-field>
+
+      <mat-form-field class="col-lg-2" appearance="outline">
+        <mat-label>
+          {{ locale.label.business }}
+        </mat-label>
+        <input formControlName="business" matInput />
+      </mat-form-field>
+
+      <mat-form-field class="col-lg-2" appearance="outline">
+        <mat-label>
+          {{ locale.label.valuation }}
+        </mat-label>
+        <input
+          formControlName="valuation"
+          matInput
+          mask="separator.2"
+          [prefix]="currencyMask.prefix"
+          [decimalMarker]="currencyMask.decimalMarker"
+          [thousandSeparator]="currencyMask.thousandSeparator"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-lg-2" appearance="outline">
+        <mat-label>
+          {{ locale.label.cnpj }}
+        </mat-label>
+        <input
+          formControlName="cnpj"
+          matInput
+          placeholder="00.000.000/0000-00"
+          mask="00.000.000/0000-00"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-lg-2" appearance="outline">
+        <mat-label> {{ locale.label.active }}? </mat-label>
+        <mat-select formControlName="active" matInput name="active">
+          <mat-option [value]="true">
+            <span>
+              {{ locale.label.yes }}
+            </span>
+          </mat-option>
+          <mat-option [value]="false">
+            {{ locale.label.no }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </article>
+
+  <article class="d-flex gap-3 mt-4">
+    <button class="btn btn-back text-white" routerLink="/pole/list">
+      {{ locale.button.back }}
+    </button>
+
+    <button class="btn btn-save text-white" (click)="save()">
+      {{ locale.button.save }}
+    </button>
+  </article>
+</section>
+
+<ng-template #isLoading>
+  <div class="my-5" fxLayoutAlign="center center">
+    <span class="spinner-border"></span>
+  </div>
+</ng-template>

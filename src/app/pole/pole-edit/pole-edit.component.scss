@@ -1,0 +1,24 @@
+.form-title {
+  color: #444;
+}
+
+.btn-back {
+  background-color: #979797;
+  &:active {
+    background-color: #979999;
+  }
+  &:hover {
+    background-color: #909090;
+  }
+}
+
+.btn-save {
+  width: 115px;
+  background-color: #ff763c;
+  &:active {
+    background-color: #ff7640;
+  }
+  &:hover {
+    background-color: #ff6000;
+  }
+}
